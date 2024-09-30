@@ -105,7 +105,6 @@ class JournalListPageState extends State<JournalListPage> {
                         child: box.isEmpty
                             ? Container(
                                 width: 330.w,
-                                height: 340.h,
                                 decoration: BoxDecoration(
                                     color: Color(0xFF935EBE),
                                     borderRadius: BorderRadius.all(
@@ -114,13 +113,13 @@ class JournalListPageState extends State<JournalListPage> {
                                   children: [
                                     Container(
                                       width: 240.w,
-                                      height: 226,
+                                      height: 226.h,
                                       decoration: BoxDecoration(
                                           image: DecorationImage(
                                               image: AssetImage(
                                                 "assets/journal.png",
                                               ),
-                                              fit: BoxFit.cover)),
+                                              fit: BoxFit.fitHeight)),
                                     ),
                                     Padding(
                                       padding:
@@ -189,6 +188,9 @@ class JournalListPageState extends State<JournalListPage> {
                                           ),
                                         ],
                                       ),
+                                    ),
+                                    SizedBox(
+                                      height: 20.h,
                                     )
                                   ],
                                 ),

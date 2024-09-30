@@ -103,7 +103,6 @@ class _ListTestPageState extends State<StatefulWidget> {
                         child: box.isEmpty
                             ? Container(
                                 width: 330.w,
-                                height: 340.h,
                                 decoration: BoxDecoration(
                                     color: Color(0xFF935EBE),
                                     borderRadius: BorderRadius.all(
@@ -112,13 +111,13 @@ class _ListTestPageState extends State<StatefulWidget> {
                                   children: [
                                     Container(
                                       width: 240.w,
-                                      height: 226,
+                                      height: 226.h,
                                       decoration: BoxDecoration(
                                           image: DecorationImage(
                                               image: AssetImage(
                                                 "assets/test.png",
                                               ),
-                                              fit: BoxFit.cover)),
+                                              fit: BoxFit.fitHeight)),
                                     ),
                                     Padding(
                                       padding:
@@ -187,6 +186,9 @@ class _ListTestPageState extends State<StatefulWidget> {
                                           ),
                                         ],
                                       ),
+                                    ),
+                                    SizedBox(
+                                      height: 20.h,
                                     )
                                   ],
                                 ),

@@ -46,18 +46,21 @@ class _OnboardingPageState extends State<StatefulWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+      body: Padding(
+        padding: EdgeInsets.only(top: MediaQuery.paddingOf(context).top),
         child: Container(
           width: double.infinity,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Container(
-                  width: 300.h,
+                  width: 300.w,
                   height: 300.h,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(300.r)),
-                    image:
-                        DecorationImage(image: AssetImage(image[_currentPage])),
+                    image: DecorationImage(
+                        image: AssetImage(image[_currentPage]),
+                        fit: BoxFit.fitHeight),
                   )),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 40.h, horizontal: 20.h),
