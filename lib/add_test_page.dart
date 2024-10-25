@@ -134,7 +134,7 @@ class _AddTestPageState extends State<AddTestPage> {
                         Container(
                           width: 300.w,
                           child: Text(
-                            "Question title ($i)",
+                            "Question title (${i + 1})",
                             style: TextStyle(
                                 fontSize: 18.sp,
                                 color: Colors.white,

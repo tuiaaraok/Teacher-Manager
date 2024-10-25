@@ -313,7 +313,7 @@ class _JournalPageState extends State<JournalPage> {
                 ),
               ),
               Container(
-                height: 70.h + _employees.length * 45.h,
+                height: 70.h + _employees.length * 50.h,
                 child: SfDataGrid(
                   verticalScrollPhysics: NeverScrollableScrollPhysics(),
                   source: _employeeDataSource,

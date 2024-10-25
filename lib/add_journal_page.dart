@@ -313,7 +313,7 @@ class _AddJournalPageState extends State<AddJournalPage> {
                 ),
               ),
               Container(
-                height: 70.h + _employees.length * 45.h,
+                height: 70.h + _employees.length * 50.h,
                 child: SfDataGrid(
                   verticalScrollPhysics: NeverScrollableScrollPhysics(),
                   source: _employeeDataSource,
@@ -333,8 +333,8 @@ class _AddJournalPageState extends State<AddJournalPage> {
                         alignment: Alignment.centerLeft,
                         child: Center(
                           child: Text('Name',
-                              style:
-                                  TextStyle(color: Colors.red, fontSize: 14.sp),
+                              style: TextStyle(
+                                  color: Colors.red, fontSize: 14.sp),
                               overflow: TextOverflow.ellipsis),
                         ),
                       ),
@@ -342,7 +342,7 @@ class _AddJournalPageState extends State<AddJournalPage> {
                     ...List.generate(daysInMonth(), (index) {
                       return GridColumn(
                         width: 32.h,
-
+                
                         columnName: '${index + 1}', // День месяца
                         label: Container(
                           decoration: BoxDecoration(
