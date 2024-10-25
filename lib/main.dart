@@ -1,29 +1,17 @@
+import 'dart:developer';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hive/hive.dart';
-import 'package:intl/intl.dart';
-import 'package:syncfusion_flutter_datagrid/datagrid.dart';
-import 'package:collection/collection.dart';
-import 'package:teacher/add_homework_page.dart';
-import 'package:teacher/add_test_page.dart';
-import 'package:teacher/create_name_page.dart';
 import 'package:teacher/data/boxes.dart';
 import 'package:teacher/data/homework.dart';
 import 'package:teacher/data/journal.dart';
 import 'package:teacher/data/test.dart';
-import 'package:teacher/add_journal_page.dart';
 import 'package:teacher/firebase_options.dart';
-import 'package:teacher/homework_page.dart';
-import 'package:teacher/journal_list_page.dart';
-import 'package:teacher/journal_page.dart';
-import 'package:teacher/list_test_page.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:teacher/menu_page.dart';
 import 'package:teacher/onboarding_page.dart';
-import 'package:teacher/preview_page.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 void main() async {
@@ -40,7 +28,6 @@ void main() async {
   await Hive.openBox("userName");
   await Hive.openBox("privacyLink");
 
-  // Call the _initializeRemoteConfig function
   await _initializeRemoteConfig().then((onValue) {
     runApp(MyApp(
       link: onValue,
@@ -59,17 +46,15 @@ Future<String> _initializeRemoteConfig() async {
       minimumFetchInterval: const Duration(minutes: 1),
     ));
 
-    // Defaults setup
-
     try {
       bool updated = await remoteConfig.fetchAndActivate();
-      print("Remote Config Update Status: $updated");
+      log("Remote Config Update Status: $updated");
 
       link = remoteConfig.getString("link");
 
-      print("Fetched link: $link");
+      log("Fetched link: $link");
     } catch (e) {
-      print("Failed to fetch remote config: $e");
+      log("Failed to fetch remote config: $e");
     }
   } else {
     if (box.get('link').contains("showAgreebutton")) {
@@ -80,12 +65,12 @@ Future<String> _initializeRemoteConfig() async {
 
       try {
         bool updated = await remoteConfig.fetchAndActivate();
-        print("Remote Config Update Status: $updated");
+        log("Remote Config Update Status: $updated");
 
         link = remoteConfig.getString("link");
-        print("Fetched link: $link");
+        log("Fetched link: $link");
       } catch (e) {
-        print("Failed to fetch remote config: $e");
+        log("Failed to fetch remote config: $e");
       }
       if (!link.contains("showAgreebutton")) {
         box.put('link', link);
@@ -96,12 +81,12 @@ Future<String> _initializeRemoteConfig() async {
   }
 
   return link == ""
-      ? "https://telegra.ph/ColorCode-Design-and-Art-Privacy-Policy-10-21?showAgreebutton"
+      ? "https://telegra.ph/YakultEdu-Teacher-Manager-Privacy-Policy-10-25?showAgreebutton"
       : link;
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key, required this.link});
+  const MyApp({super.key, required this.link});
   final String link;
 
   @override
@@ -115,8 +100,9 @@ class MyApp extends StatelessWidget {
             title: 'Flutter Demo',
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
-                scaffoldBackgroundColor: Color(0xFF6E02C3),
-                appBarTheme: AppBarTheme(backgroundColor: Colors.transparent)),
+                scaffoldBackgroundColor: const Color(0xFF6E02C3),
+                appBarTheme:
+                    const AppBarTheme(backgroundColor: Colors.transparent)),
             home: Hive.box("privacyLink").isEmpty
                 ? WebViewScreen(
                     link: link,
@@ -125,8 +111,8 @@ class MyApp extends StatelessWidget {
                         .get('link')
                         .contains("showAgreebutton")
                     ? Hive.box("userName").isEmpty
-                        ? OnboardingPage()
-                        : MenuPage()
+                        ? const OnboardingPage()
+                        : const MenuPage()
                     : WebViewScreen(
                         link: link,
                       ),
@@ -136,7 +122,7 @@ class MyApp extends StatelessWidget {
 }
 
 class WebViewScreen extends StatefulWidget {
-  WebViewScreen({required this.link});
+  const WebViewScreen({super.key, required this.link});
   final String link;
 
   @override
@@ -165,7 +151,6 @@ class _WebViewScreenState extends State<WebViewScreen> {
       ..setNavigationDelegate(
         NavigationDelegate(
           onProgress: (int progress) {
-            print(progress);
             if (progress == 100) {
               loadAgree = true;
               setState(() {});
@@ -201,9 +186,10 @@ class _WebViewScreenState extends State<WebViewScreen> {
                   var box = await Hive.openBox('privacyLink');
                   box.put('link', widget.link);
                   Navigator.push(
+                    // ignore: use_build_context_synchronously
                     context,
                     MaterialPageRoute<void>(
-                      builder: (BuildContext context) => OnboardingPage(),
+                      builder: (BuildContext context) => const OnboardingPage(),
                     ),
                   );
                 },
@@ -211,12 +197,12 @@ class _WebViewScreenState extends State<WebViewScreen> {
                     ? Align(
                         alignment: Alignment.bottomCenter,
                         child: Padding(
-                          padding: EdgeInsets.only(bottom: 20),
+                          padding: const EdgeInsets.only(bottom: 20),
                           child: Container(
                             width: 200,
                             height: 60,
                             color: Colors.amber,
-                            child: Center(child: Text("AGREE")),
+                            child: const Center(child: Text("AGREE")),
                           ),
                         ))
                     : null),

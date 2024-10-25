@@ -1,10 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:teacher/preview_page.dart';
 
 class CreateNamePage extends StatefulWidget {
+  const CreateNamePage({super.key});
+
   @override
   State<StatefulWidget> createState() => CreateNamePageState();
 }
@@ -15,7 +16,8 @@ class CreateNamePageState extends State<StatefulWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
+          width: double.infinity,
           child: Padding(
             padding: EdgeInsets.only(top: MediaQuery.paddingOf(context).top),
             child: Padding(
@@ -42,7 +44,7 @@ class CreateNamePageState extends State<StatefulWidget> {
                           fontWeight: FontWeight.bold),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     width: 310.w,
                     child: Text(
                       "Your name",
@@ -56,8 +58,9 @@ class CreateNamePageState extends State<StatefulWidget> {
                     height: 60.h,
                     width: 310.w,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(12)),
-                        color: Color(0xFFC2B0FF).withOpacity(0.3),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(12)),
+                        color: const Color(0xFFC2B0FF).withOpacity(0.3),
                         border: Border.all(color: Colors.white, width: 2.h)),
                     child: Center(
                       child: TextField(
@@ -96,6 +99,7 @@ class CreateNamePageState extends State<StatefulWidget> {
                           var box = await Hive.openBox('userName');
                           box.put('name', nameController.text.toString());
                           Navigator.push(
+                            // ignore: use_build_context_synchronously
                             context,
                             MaterialPageRoute<void>(
                               builder: (BuildContext context) => PreviewPage(
@@ -111,11 +115,11 @@ class CreateNamePageState extends State<StatefulWidget> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(12.r)),
                           gradient: nameController.text.isNotEmpty
-                              ? LinearGradient(colors: [
+                              ? const LinearGradient(colors: [
                                   Color(0xFF7D49F4),
                                   Color(0xFF5225C1)
                                 ])
-                              : LinearGradient(colors: [
+                              : const LinearGradient(colors: [
                                   Color.fromARGB(162, 124, 73, 244),
                                   Color.fromARGB(103, 81, 37, 193)
                                 ]),
@@ -126,7 +130,7 @@ class CreateNamePageState extends State<StatefulWidget> {
                             style: TextStyle(
                                 color: nameController.text.isNotEmpty
                                     ? Colors.white
-                                    : Color(0xFFF2F2F7).withOpacity(0.5),
+                                    : const Color(0xFFF2F2F7).withOpacity(0.5),
                                 fontSize: 24.sp),
                           ),
                         ),

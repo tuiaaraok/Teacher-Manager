@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:teacher/add_homework_page.dart';
-import 'package:teacher/add_test_page.dart';
 import 'package:teacher/data/boxes.dart';
 import 'package:teacher/data/homework.dart';
-import 'package:teacher/data/test.dart';
-import 'package:teacher/pdf_api.dart';
-import 'package:teacher/test_page.dart';
 
 class HomeworkPage extends StatefulWidget {
+  const HomeworkPage({super.key});
+
+  @override
   State<StatefulWidget> createState() => _HomeworkPageState();
 }
 
@@ -54,7 +51,7 @@ class _HomeworkPageState extends State<StatefulWidget> {
                                   child: Text(
                                     "Back",
                                     style: TextStyle(
-                                        color: Color(0xFF6E02C3),
+                                        color: const Color(0xFF6E02C3),
                                         fontSize: 18.sp),
                                   ),
                                 ),
@@ -95,7 +92,7 @@ class _HomeworkPageState extends State<StatefulWidget> {
                                         EdgeInsets.symmetric(vertical: 10.h),
                                     child: Column(
                                       children: [
-                                        Container(
+                                        SizedBox(
                                           width: 300.w,
                                           child: Row(
                                             mainAxisAlignment:
@@ -108,7 +105,8 @@ class _HomeworkPageState extends State<StatefulWidget> {
                                                     .toString(),
                                                 style: TextStyle(
                                                     fontSize: 16.sp,
-                                                    color: Color(0xFF6E02C3),
+                                                    color:
+                                                        const Color(0xFF6E02C3),
                                                     fontWeight:
                                                         FontWeight.w700),
                                               ),
@@ -120,7 +118,8 @@ class _HomeworkPageState extends State<StatefulWidget> {
                                                         BorderRadius.all(
                                                             Radius.circular(
                                                                 12.r)),
-                                                    color: Color(0xFF6E02C3)),
+                                                    color: const Color(
+                                                        0xFF6E02C3)),
                                                 child: Center(
                                                   child: Text(
                                                     "Surrender: ${box.getAt(i)!.surrender.toString()}",
@@ -138,12 +137,12 @@ class _HomeworkPageState extends State<StatefulWidget> {
                                         Padding(
                                           padding: EdgeInsets.symmetric(
                                               vertical: 10.h),
-                                          child: Container(
+                                          child: SizedBox(
                                               width: 300.w,
-                                              child: MySeparator(
+                                              child: const MySeparator(
                                                   color: Color(0xFF6E02C3))),
                                         ),
-                                        Container(
+                                        SizedBox(
                                           width: 300.w,
                                           child: Text(
                                             box.getAt(i)!.task.toString(),
@@ -166,7 +165,7 @@ class _HomeworkPageState extends State<StatefulWidget> {
                             ? Container(
                                 width: 330.w,
                                 decoration: BoxDecoration(
-                                    color: Color(0xFF935EBE),
+                                    color: const Color(0xFF935EBE),
                                     borderRadius: BorderRadius.all(
                                         Radius.circular(12.r))),
                                 child: Column(
@@ -174,7 +173,7 @@ class _HomeworkPageState extends State<StatefulWidget> {
                                     Container(
                                       width: 240.w,
                                       height: 226.h,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                           image: DecorationImage(
                                               image: AssetImage(
                                                 "assets/homework.png",
@@ -195,7 +194,8 @@ class _HomeworkPageState extends State<StatefulWidget> {
                                               Text(
                                                 "You don't have\nhomework yet",
                                                 style: TextStyle(
-                                                    color: Color(0xFF6E02C3),
+                                                    color:
+                                                        const Color(0xFF6E02C3),
                                                     height: 1.h,
                                                     fontSize: 24.sp,
                                                     fontWeight:
@@ -217,9 +217,9 @@ class _HomeworkPageState extends State<StatefulWidget> {
                                               Navigator.push(
                                                 context,
                                                 MaterialPageRoute<void>(
-                                                  builder:
-                                                      (BuildContext context) =>
-                                                          AddHomeworkPage(),
+                                                  builder: (BuildContext
+                                                          context) =>
+                                                      const AddHomeworkPage(),
                                                 ),
                                               );
                                             },
@@ -229,7 +229,7 @@ class _HomeworkPageState extends State<StatefulWidget> {
                                               decoration: BoxDecoration(
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(18.r)),
-                                                gradient: LinearGradient(
+                                                gradient: const LinearGradient(
                                                     begin: Alignment.topCenter,
                                                     end: Alignment.bottomCenter,
                                                     colors: [
@@ -261,7 +261,7 @@ class _HomeworkPageState extends State<StatefulWidget> {
                                     context,
                                     MaterialPageRoute<void>(
                                       builder: (BuildContext context) =>
-                                          AddHomeworkPage(),
+                                          const AddHomeworkPage(),
                                     ),
                                   );
                                 },
@@ -271,7 +271,7 @@ class _HomeworkPageState extends State<StatefulWidget> {
                                   decoration: BoxDecoration(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(50.r)),
-                                    gradient: LinearGradient(
+                                    gradient: const LinearGradient(
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
                                         colors: [
@@ -298,8 +298,7 @@ class _HomeworkPageState extends State<StatefulWidget> {
 }
 
 class MySeparator extends StatelessWidget {
-  const MySeparator({Key? key, this.height = 1, this.color = Colors.black})
-      : super(key: key);
+  const MySeparator({super.key, this.height = 1, this.color = Colors.black});
   final double height;
   final Color color;
 
@@ -312,6 +311,8 @@ class MySeparator extends StatelessWidget {
         final dashHeight = height;
         final dashCount = (boxWidth / (2 * dashWidth)).floor();
         return Flex(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          direction: Axis.horizontal,
           children: List.generate(dashCount, (_) {
             return SizedBox(
               width: dashWidth,
@@ -321,8 +322,6 @@ class MySeparator extends StatelessWidget {
               ),
             );
           }),
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          direction: Axis.horizontal,
         );
       },
     );

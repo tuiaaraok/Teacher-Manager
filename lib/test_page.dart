@@ -4,7 +4,7 @@ import 'package:teacher/data/test.dart';
 import 'package:teacher/pdf_api.dart';
 
 class TestPage extends StatefulWidget {
-  TestPage({required this.info});
+  const TestPage({super.key, required this.info});
   final Test? info;
   @override
   State<StatefulWidget> createState() => _TestPageState();
@@ -20,7 +20,7 @@ class _TestPageState extends State<TestPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: SizedBox(
         height: double.infinity,
         child: Stack(
           children: [
@@ -55,7 +55,7 @@ class _TestPageState extends State<TestPage> {
                                 child: Text(
                                   "Back",
                                   style: TextStyle(
-                                      color: Color(0xFF6E02C3),
+                                      color: const Color(0xFF6E02C3),
                                       fontSize: 18.sp),
                                 ),
                               ),
@@ -70,7 +70,7 @@ class _TestPageState extends State<TestPage> {
                         height: 50.h,
                         width: 310.w,
                         decoration: BoxDecoration(
-                            gradient: LinearGradient(
+                            gradient: const LinearGradient(
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
                                 colors: [Color(0xFF7D49F4), Color(0xFF5225C1)]),
@@ -142,7 +142,7 @@ class _TestPageState extends State<TestPage> {
                                         width: 48.h,
                                         height: 48.h,
                                         decoration: BoxDecoration(
-                                            color: Color(0xFFC2B0FF),
+                                            color: const Color(0xFFC2B0FF),
                                             border: Border.all(
                                                 color: Colors.white,
                                                 width: 2.h),
@@ -156,7 +156,7 @@ class _TestPageState extends State<TestPage> {
                                                   size: 40.h,
                                                   color: Colors.greenAccent,
                                                 )
-                                              : SizedBox.shrink(),
+                                              : const SizedBox.shrink(),
                                         ),
                                       ),
                                     ),
@@ -164,9 +164,9 @@ class _TestPageState extends State<TestPage> {
                                       height: 50.h,
                                       width: 220.w,
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.all(
+                                          borderRadius: const BorderRadius.all(
                                               Radius.circular(12)),
-                                          color: Color(0xFFC2B0FF)
+                                          color: const Color(0xFFC2B0FF)
                                               .withOpacity(0.3),
                                           border: Border.all(
                                               color: Colors.white, width: 2.h)),
@@ -207,8 +207,8 @@ class _TestPageState extends State<TestPage> {
                   child: Center(
                     child: Text(
                       "Unload",
-                      style:
-                          TextStyle(fontSize: 18.sp, color: Color(0xFF6E02C3)),
+                      style: TextStyle(
+                          fontSize: 18.sp, color: const Color(0xFF6E02C3)),
                     ),
                   ),
                 ),

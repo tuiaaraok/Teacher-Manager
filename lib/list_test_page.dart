@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:teacher/add_test_page.dart';
 import 'package:teacher/data/boxes.dart';
 import 'package:teacher/data/test.dart';
-import 'package:teacher/pdf_api.dart';
 import 'package:teacher/test_page.dart';
 
 class ListTestPage extends StatefulWidget {
+  const ListTestPage({super.key});
+
+  @override
   State<StatefulWidget> createState() => _ListTestPageState();
 }
 
@@ -50,7 +51,7 @@ class _ListTestPageState extends State<StatefulWidget> {
                                   child: Text(
                                     "Back",
                                     style: TextStyle(
-                                        color: Color(0xFF6E02C3),
+                                        color: const Color(0xFF6E02C3),
                                         fontSize: 18.sp),
                                   ),
                                 ),
@@ -77,7 +78,7 @@ class _ListTestPageState extends State<StatefulWidget> {
                               height: 50.h,
                               width: 310.w,
                               decoration: BoxDecoration(
-                                  gradient: LinearGradient(
+                                  gradient: const LinearGradient(
                                       begin: Alignment.topCenter,
                                       end: Alignment.bottomCenter,
                                       colors: [
@@ -104,7 +105,7 @@ class _ListTestPageState extends State<StatefulWidget> {
                             ? Container(
                                 width: 330.w,
                                 decoration: BoxDecoration(
-                                    color: Color(0xFF935EBE),
+                                    color: const Color(0xFF935EBE),
                                     borderRadius: BorderRadius.all(
                                         Radius.circular(12.r))),
                                 child: Column(
@@ -112,7 +113,7 @@ class _ListTestPageState extends State<StatefulWidget> {
                                     Container(
                                       width: 240.w,
                                       height: 226.h,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                           image: DecorationImage(
                                               image: AssetImage(
                                                 "assets/test.png",
@@ -133,7 +134,8 @@ class _ListTestPageState extends State<StatefulWidget> {
                                               Text(
                                                 "You don't have\ntests",
                                                 style: TextStyle(
-                                                    color: Color(0xFF6E02C3),
+                                                    color:
+                                                        const Color(0xFF6E02C3),
                                                     height: 1.h,
                                                     fontSize: 24.sp,
                                                     fontWeight:
@@ -157,7 +159,7 @@ class _ListTestPageState extends State<StatefulWidget> {
                                                 MaterialPageRoute<void>(
                                                   builder:
                                                       (BuildContext context) =>
-                                                          AddTestPage(),
+                                                          const AddTestPage(),
                                                 ),
                                               );
                                             },
@@ -167,7 +169,7 @@ class _ListTestPageState extends State<StatefulWidget> {
                                               decoration: BoxDecoration(
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(18.r)),
-                                                gradient: LinearGradient(
+                                                gradient: const LinearGradient(
                                                     begin: Alignment.topCenter,
                                                     end: Alignment.bottomCenter,
                                                     colors: [
@@ -199,7 +201,7 @@ class _ListTestPageState extends State<StatefulWidget> {
                                     context,
                                     MaterialPageRoute<void>(
                                       builder: (BuildContext context) =>
-                                          AddTestPage(),
+                                          const AddTestPage(),
                                     ),
                                   );
                                 },
@@ -209,7 +211,7 @@ class _ListTestPageState extends State<StatefulWidget> {
                                   decoration: BoxDecoration(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(50.r)),
-                                    gradient: LinearGradient(
+                                    gradient: const LinearGradient(
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
                                         colors: [

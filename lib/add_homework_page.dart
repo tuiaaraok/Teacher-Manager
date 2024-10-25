@@ -6,12 +6,14 @@ import 'package:teacher/data/boxes.dart';
 import 'package:teacher/data/homework.dart';
 
 class AddHomeworkPage extends StatefulWidget {
+  const AddHomeworkPage({super.key});
+
   @override
   State<StatefulWidget> createState() => _AddHomeworkPageState();
 }
 
 class _AddHomeworkPageState extends State<StatefulWidget> {
-  FocusNode _nodeText1 = FocusNode();
+  final FocusNode _nodeText1 = FocusNode();
   TextEditingController taskController = TextEditingController();
   TextEditingController classNameController = TextEditingController();
   TextEditingController todayController = TextEditingController();
@@ -63,7 +65,8 @@ class _AddHomeworkPageState extends State<StatefulWidget> {
                             child: Text(
                               "Back",
                               style: TextStyle(
-                                  color: Color(0xFF6E02C3), fontSize: 18.sp),
+                                  color: const Color(0xFF6E02C3),
+                                  fontSize: 18.sp),
                             ),
                           ),
                         ),
@@ -73,7 +76,7 @@ class _AddHomeworkPageState extends State<StatefulWidget> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 20.h),
-                  child: Container(
+                  child: SizedBox(
                     width: 300.w,
                     child: Column(
                       children: [
@@ -97,7 +100,7 @@ class _AddHomeworkPageState extends State<StatefulWidget> {
                                     Border.all(color: Colors.white, width: 2.h),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(12.r)),
-                                color: Color(0xFFC2B0FF).withOpacity(0.3),
+                                color: const Color(0xFFC2B0FF).withOpacity(0.3),
                               ),
                               child: Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 10.w),
@@ -135,7 +138,7 @@ class _AddHomeworkPageState extends State<StatefulWidget> {
                             children: [
                               Column(
                                 children: [
-                                  Container(
+                                  SizedBox(
                                     width: 120.w,
                                     child: Text(
                                       "Today",
@@ -153,7 +156,8 @@ class _AddHomeworkPageState extends State<StatefulWidget> {
                                           color: Colors.white, width: 2.h),
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(12.r)),
-                                      color: Color(0xFFC2B0FF).withOpacity(0.3),
+                                      color: const Color(0xFFC2B0FF)
+                                          .withOpacity(0.3),
                                     ),
                                     child: Padding(
                                       padding: EdgeInsets.symmetric(
@@ -189,7 +193,7 @@ class _AddHomeworkPageState extends State<StatefulWidget> {
                               ),
                               Column(
                                 children: [
-                                  Container(
+                                  SizedBox(
                                     width: 120.w,
                                     child: Text(
                                       "Surrender",
@@ -207,7 +211,8 @@ class _AddHomeworkPageState extends State<StatefulWidget> {
                                           color: Colors.white, width: 2.h),
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(12.r)),
-                                      color: Color(0xFFC2B0FF).withOpacity(0.3),
+                                      color: const Color(0xFFC2B0FF)
+                                          .withOpacity(0.3),
                                     ),
                                     child: Padding(
                                       padding: EdgeInsets.symmetric(
@@ -264,7 +269,7 @@ class _AddHomeworkPageState extends State<StatefulWidget> {
                                     Border.all(color: Colors.white, width: 2.h),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(12.r)),
-                                color: Color(0xFFC2B0FF).withOpacity(0.3),
+                                color: const Color(0xFFC2B0FF).withOpacity(0.3),
                               ),
                               child: Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 10.w),
@@ -324,11 +329,11 @@ class _AddHomeworkPageState extends State<StatefulWidget> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(12.r)),
                                 gradient: allFieldsFilled()
-                                    ? LinearGradient(colors: [
+                                    ? const LinearGradient(colors: [
                                         Color(0xFF7D49F4),
                                         Color(0xFF5225C1)
                                       ])
-                                    : LinearGradient(colors: [
+                                    : const LinearGradient(colors: [
                                         Color.fromARGB(162, 124, 73, 244),
                                         Color.fromARGB(103, 81, 37, 193)
                                       ]),
@@ -339,7 +344,8 @@ class _AddHomeworkPageState extends State<StatefulWidget> {
                                   style: TextStyle(
                                       color: allFieldsFilled()
                                           ? Colors.white
-                                          : Color(0xFFF2F2F7).withOpacity(0.5),
+                                          : const Color(0xFFF2F2F7)
+                                              .withOpacity(0.5),
                                       fontSize: 24.sp),
                                 ),
                               ),

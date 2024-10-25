@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,17 +10,18 @@ import 'package:teacher/data/boxes.dart';
 import 'package:teacher/data/journal.dart';
 
 class AddJournalPage extends StatefulWidget {
-  AddJournalPage({
-    Key? key,
-  }) : super(key: key);
+  const AddJournalPage({
+    super.key,
+  });
 
   @override
+  // ignore: library_private_types_in_public_api
   _AddJournalPageState createState() => _AddJournalPageState();
 }
 
 class _AddJournalPageState extends State<AddJournalPage> {
   late EmployeeDataSource _employeeDataSource;
-  List<Employee> _employees = <Employee>[];
+  final List<Employee> _employees = <Employee>[];
   late DataGridController _dataGridController;
   DateTime now = DateTime.now();
   TextEditingController notesController = TextEditingController();
@@ -30,15 +33,7 @@ class _AddJournalPageState extends State<AddJournalPage> {
 
     _employees.add(Employee("", List.filled(daysInMonth(), "")));
 
-    createDataSource(); // Создаем источник данных
-  }
-
-  void elementsTable() {
-    for (int i = 0; i < _employees.length; i++) {
-      for (int j = 0; j < _employees[i].days.length; j++) {
-        print("${j} elem:${_employees[i].days[j]}");
-      }
-    }
+    createDataSource();
   }
 
   void createDataSource() {
@@ -51,8 +46,8 @@ class _AddJournalPageState extends State<AddJournalPage> {
     final newEmployee = Employee("", List.filled(daysInMonth(), ""));
     setState(() {
       _employees.add(newEmployee);
-      _employeeDataSource = EmployeeDataSource(_employees,
-          addEmployee: addNewEmployee); // Обновляем источник данных
+      _employeeDataSource =
+          EmployeeDataSource(_employees, addEmployee: addNewEmployee);
     });
   }
 
@@ -62,7 +57,7 @@ class _AddJournalPageState extends State<AddJournalPage> {
   }
 
   List<Employee> getEmployeeData() {
-    return []; // Начальные данные
+    return [];
   }
 
   void changeMonth(int delta) {
@@ -71,27 +66,22 @@ class _AddJournalPageState extends State<AddJournalPage> {
 
       // Проверка, есть ли данные для выбранного месяца
       if (hiveDate.containsKey(DateFormat("MMMM, yyyy").format(now))) {
-        // Загружаем существующие значения
         Map<String, List<String>> existingData =
             hiveDate[DateFormat("MMMM, yyyy").format(now)]!;
 
-        _employees.forEach((employee) {
+        for (var employee in _employees) {
           if (existingData.containsKey(employee.name)) {
             employee.days = existingData[employee.name]!;
           } else {
-            employee.days = List.filled(
-                daysInMonth(), ""); // Сброс, если данных для сотрудника нет
+            employee.days = List.filled(daysInMonth(), "");
           }
-        });
+        }
       } else {
-        // Если данных нет, сбрасываем для всех сотрудников
-        _employees.forEach((employee) {
-          employee.days =
-              List.filled(daysInMonth(), ""); // Обновляем количество дней
-        });
+        for (var employee in _employees) {
+          employee.days = List.filled(daysInMonth(), "");
+        }
       }
 
-      // Обновляем источник данных
       _employeeDataSource =
           EmployeeDataSource(_employees, addEmployee: addNewEmployee);
     });
@@ -131,7 +121,8 @@ class _AddJournalPageState extends State<AddJournalPage> {
                               child: Text(
                                 "Back",
                                 style: TextStyle(
-                                    color: Color(0xFF6E02C3), fontSize: 18.sp),
+                                    color: const Color(0xFF6E02C3),
+                                    fontSize: 18.sp),
                               ),
                             ),
                           ),
@@ -142,7 +133,7 @@ class _AddJournalPageState extends State<AddJournalPage> {
                   SizedBox(
                     height: 30.h,
                   ),
-                  Container(
+                  SizedBox(
                     width: 310.w,
                     child: Text(
                       "Class name",
@@ -156,8 +147,9 @@ class _AddJournalPageState extends State<AddJournalPage> {
                     height: 60.h,
                     width: 310.w,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(12)),
-                        color: Color(0xFFC2B0FF).withOpacity(0.3),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(12)),
+                        color: const Color(0xFFC2B0FF).withOpacity(0.3),
                         border: Border.all(color: Colors.white, width: 2.h)),
                     child: Center(
                       child: TextField(
@@ -185,7 +177,7 @@ class _AddJournalPageState extends State<AddJournalPage> {
                       ),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     width: 310.w,
                     child: Align(
                       alignment: Alignment.centerRight,
@@ -194,20 +186,18 @@ class _AddJournalPageState extends State<AddJournalPage> {
                         child: GestureDetector(
                           onTap: () {
                             Map<String, List<String>> newTable = {};
-                            _employees.forEach(
-                              (element) {
-                                if (element.name != "") {
-                                  newTable[element.name] = element.days;
-                                }
-                              },
-                            );
+                            for (var element in _employees) {
+                              if (element.name != "") {
+                                newTable[element.name] = element.days;
+                              }
+                            }
                             hiveDate[DateFormat("MMMM, yyyy").format(now)] =
                                 newTable;
-                            hiveDate.values.forEach((action) {
+                            for (var action in hiveDate.values) {
                               action.forEach((key, value) {
-                                print("${key}, ${value}");
+                                log("$key, $value");
                               });
-                            });
+                            }
                             if (notesController.text.isNotEmpty) {
                               Box<Journal> contactsBox =
                                   Hive.box<Journal>(HiveBoxes.journal);
@@ -215,7 +205,7 @@ class _AddJournalPageState extends State<AddJournalPage> {
                                   className: notesController.text.toString(),
                                   journal: hiveDate);
                               contactsBox.add(addJournal);
-                              print("object");
+
                               Navigator.pop(context);
                             }
                           },
@@ -232,8 +222,9 @@ class _AddJournalPageState extends State<AddJournalPage> {
                                 style: TextStyle(
                                     fontSize: 18.sp,
                                     color: notesController.text.isNotEmpty
-                                        ? Color(0xFF6E02C3)
-                                        : Color(0xFF6E02C3).withOpacity(0.5)),
+                                        ? const Color(0xFF6E02C3)
+                                        : const Color(0xFF6E02C3)
+                                            .withOpacity(0.5)),
                               ),
                             ),
                           ),
@@ -248,7 +239,7 @@ class _AddJournalPageState extends State<AddJournalPage> {
                 child: Container(
                   height: 50.h,
                   decoration: BoxDecoration(
-                      gradient: LinearGradient(
+                      gradient: const LinearGradient(
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                           colors: [Color(0xFF7D49F4), Color(0xFF5225C1)]),
@@ -263,18 +254,16 @@ class _AddJournalPageState extends State<AddJournalPage> {
                         child: GestureDetector(
                             onTap: () {
                               Map<String, List<String>> newTable = {};
-                              _employees.forEach(
-                                (element) {
-                                  if (element.name != "") {
-                                    newTable[element.name] = element.days;
-                                  }
-                                },
-                              );
+                              for (var element in _employees) {
+                                if (element.name != "") {
+                                  newTable[element.name] = element.days;
+                                }
+                              }
                               hiveDate[DateFormat("MMMM, yyyy").format(now)] =
                                   newTable;
                               changeMonth(-1);
                             }, // Изменяем месяц на один назад
-                            child: Icon(
+                            child: const Icon(
                               Icons.arrow_back_ios,
                               color: Colors.white,
                             )),
@@ -291,18 +280,16 @@ class _AddJournalPageState extends State<AddJournalPage> {
                         child: GestureDetector(
                           onTap: () {
                             Map<String, List<String>> newTable = {};
-                            _employees.forEach(
-                              (element) {
-                                if (element.name != "") {
-                                  newTable[element.name] = element.days;
-                                }
-                              },
-                            );
+                            for (var element in _employees) {
+                              if (element.name != "") {
+                                newTable[element.name] = element.days;
+                              }
+                            }
                             hiveDate[DateFormat("MMMM, yyyy").format(now)] =
                                 newTable;
                             changeMonth(1);
                           }, // Изменяем месяц на один вперед
-                          child: Icon(
+                          child: const Icon(
                             Icons.arrow_forward_ios,
                             color: Colors.white,
                           ),
@@ -312,10 +299,10 @@ class _AddJournalPageState extends State<AddJournalPage> {
                   ),
                 ),
               ),
-              Container(
+              SizedBox(
                 height: 70.h + _employees.length * 50.h,
                 child: SfDataGrid(
-                  verticalScrollPhysics: NeverScrollableScrollPhysics(),
+                  verticalScrollPhysics: const NeverScrollableScrollPhysics(),
                   source: _employeeDataSource,
                   defaultColumnWidth: 40,
                   allowEditing: true,
@@ -333,8 +320,8 @@ class _AddJournalPageState extends State<AddJournalPage> {
                         alignment: Alignment.centerLeft,
                         child: Center(
                           child: Text('Name',
-                              style: TextStyle(
-                                  color: Colors.red, fontSize: 14.sp),
+                              style:
+                                  TextStyle(color: Colors.red, fontSize: 14.sp),
                               overflow: TextOverflow.ellipsis),
                         ),
                       ),
@@ -342,7 +329,7 @@ class _AddJournalPageState extends State<AddJournalPage> {
                     ...List.generate(daysInMonth(), (index) {
                       return GridColumn(
                         width: 32.h,
-                
+
                         columnName: '${index + 1}', // День месяца
                         label: Container(
                           decoration: BoxDecoration(
@@ -376,10 +363,8 @@ class Employee {
   DataGridRow getDataGridRow() {
     return DataGridRow(cells: <DataGridCell>[
       DataGridCell<String>(columnName: 'Name', value: name),
-      ...days
-          .map((dayValue) =>
-              DataGridCell<String>(columnName: dayValue, value: dayValue))
-          .toList(),
+      ...days.map((dayValue) =>
+          DataGridCell<String>(columnName: dayValue, value: dayValue)),
     ]);
   }
 }
@@ -393,6 +378,7 @@ class EmployeeDataSource extends DataGridSource {
         .toList();
   }
 
+  // ignore: prefer_final_fields
   List<Employee> _employees = [];
   List<DataGridRow> dataGridRows = [];
   dynamic newCellValue;
@@ -404,20 +390,19 @@ class EmployeeDataSource extends DataGridSource {
   @override
   DataGridRowAdapter? buildRow(DataGridRow row) {
     if (dataGridRows.last == row) {
-      // Если это последний ряд, то показываем иконку вместо данных
       return DataGridRowAdapter(cells: [
         Container(
           decoration: BoxDecoration(border: Border.all(color: Colors.white)),
           alignment: Alignment.center,
           child: CircleAvatar(
-            backgroundColor: Color(0xFFC2B0FF).withOpacity(0.3),
+            backgroundColor: const Color(0xFFC2B0FF).withOpacity(0.3),
             child: IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.add,
                 color: Colors.white,
               ),
               onPressed: () {
-                addEmployee(); // Вызываем функцию для добавления нового сотрудника
+                addEmployee();
               },
             ),
           ),
@@ -429,12 +414,12 @@ class EmployeeDataSource extends DataGridSource {
               alignment: (dataGridCell.columnName == 'Name')
                   ? Alignment.centerRight
                   : Alignment.centerLeft,
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
                 dataGridCell.value.toString(),
                 overflow: TextOverflow.ellipsis,
               ));
-        }).toList(),
+        }),
       ]);
     }
     return DataGridRowAdapter(
@@ -442,11 +427,11 @@ class EmployeeDataSource extends DataGridSource {
         return Container(
           decoration: BoxDecoration(
               border: Border.all(color: Colors.white),
-              color: Color(0xFF6E02C3)),
+              color: const Color(0xFF6E02C3)),
           alignment: (dataGridCell.columnName == 'Name')
               ? Alignment.centerLeft
               : Alignment.center,
-          padding: EdgeInsets.symmetric(horizontal: 16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Text(dataGridCell.value.toString(),
               style: TextStyle(color: Colors.white, fontSize: 18.sp),
               overflow: TextOverflow.ellipsis),
@@ -479,7 +464,7 @@ class EmployeeDataSource extends DataGridSource {
           DataGridCell<String>(
               columnName: column.columnName, value: newCellValue);
       _employees[dataRowIndex].days[rowColumnIndex.columnIndex - 1] =
-          newCellValue.toString(); // -1, так как первая колонка - имя
+          newCellValue.toString();
     }
   }
 
@@ -512,13 +497,13 @@ class EmployeeDataSource extends DataGridSource {
               controller: editingController..text = displayText,
               textAlign: TextAlign.left,
               autocorrect: false,
-              decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 16.0)),
+              decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 16.0)),
               onChanged: (String value) {
-                newCellValue = value; // Сохраняем новое значение
+                newCellValue = value;
               },
               onSubmitted: (String value) {
-                submitCell(); // Подтверждаем изменения
+                submitCell();
               },
             ),
     );

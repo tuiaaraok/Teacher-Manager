@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
@@ -5,6 +7,8 @@ import 'package:teacher/data/boxes.dart';
 import 'package:teacher/data/test.dart';
 
 class AddTestPage extends StatefulWidget {
+  const AddTestPage({super.key});
+
   @override
   State<AddTestPage> createState() => _AddTestPageState();
 }
@@ -16,20 +20,19 @@ class _AddTestPageState extends State<AddTestPage> {
   List<List<bool>> isCurrentAnswer = [];
 
   bool allFieldsFilled() {
-    // Проверяем, заполнены ли все поля
     if (notesController.text.isEmpty) return false;
 
     for (var q in question) {
-      if (q.text.isEmpty) return false; // Проверьте вопросы
+      if (q.text.isEmpty) return false;
     }
 
     for (var ansList in answer) {
       for (var ans in ansList) {
-        if (ans.text.isEmpty) return false; // Проверьте ответы
+        if (ans.text.isEmpty) return false;
       }
     }
 
-    return true; // Все поля заполнены
+    return true;
   }
 
   @override
@@ -64,7 +67,8 @@ class _AddTestPageState extends State<AddTestPage> {
                           child: Text(
                             "Back",
                             style: TextStyle(
-                                color: Color(0xFF6E02C3), fontSize: 18.sp),
+                                color: const Color(0xFF6E02C3),
+                                fontSize: 18.sp),
                           ),
                         ),
                       ),
@@ -77,7 +81,7 @@ class _AddTestPageState extends State<AddTestPage> {
                 child: Column(
                   children: [
                     // Class name input
-                    Container(
+                    SizedBox(
                       width: 310.w,
                       child: Text(
                         "Test name",
@@ -91,8 +95,9 @@ class _AddTestPageState extends State<AddTestPage> {
                       height: 60.h,
                       width: 310.w,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(12)),
-                          color: Color(0xFFC2B0FF).withOpacity(0.3),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(12)),
+                          color: const Color(0xFFC2B0FF).withOpacity(0.3),
                           border: Border.all(color: Colors.white, width: 2.h)),
                       child: Center(
                         child: TextField(
@@ -126,12 +131,12 @@ class _AddTestPageState extends State<AddTestPage> {
               for (int i = 0; i < question.length; i++)
                 Padding(
                   padding: EdgeInsets.only(top: 20.h),
-                  child: Container(
+                  child: SizedBox(
                     width: 300.w,
                     child: Column(
                       children: [
                         // Question input
-                        Container(
+                        SizedBox(
                           width: 300.w,
                           child: Text(
                             "Question title (${i + 1})",
@@ -146,8 +151,8 @@ class _AddTestPageState extends State<AddTestPage> {
                           width: 300.w,
                           decoration: BoxDecoration(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(12)),
-                              color: Color(0xFFC2B0FF).withOpacity(0.3),
+                                  const BorderRadius.all(Radius.circular(12)),
+                              color: const Color(0xFFC2B0FF).withOpacity(0.3),
                               border:
                                   Border.all(color: Colors.white, width: 2.h)),
                           child: Center(
@@ -196,7 +201,7 @@ class _AddTestPageState extends State<AddTestPage> {
                                     width: 48.h,
                                     height: 48.h,
                                     decoration: BoxDecoration(
-                                        color: Color(0xFFC2B0FF),
+                                        color: const Color(0xFFC2B0FF),
                                         border: Border.all(
                                             color: Colors.white, width: 2.h),
                                         borderRadius: BorderRadius.all(
@@ -208,18 +213,19 @@ class _AddTestPageState extends State<AddTestPage> {
                                               size: 40.h,
                                               color: Colors.greenAccent,
                                             )
-                                          : SizedBox.shrink(),
+                                          : const SizedBox.shrink(),
                                     ),
                                   ),
                                 ),
-                                Spacer(),
+                                const Spacer(),
                                 Container(
                                   height: 50.h,
                                   width: 220.w,
                                   decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(12)),
-                                      color: Color(0xFFC2B0FF).withOpacity(0.3),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(12)),
+                                      color: const Color(0xFFC2B0FF)
+                                          .withOpacity(0.3),
                                       border: Border.all(
                                           color: Colors.white, width: 2.h)),
                                   child: Center(
@@ -280,7 +286,7 @@ class _AddTestPageState extends State<AddTestPage> {
                                   decoration: BoxDecoration(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(30.r)),
-                                    gradient: LinearGradient(
+                                    gradient: const LinearGradient(
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
                                         colors: [
@@ -322,7 +328,7 @@ class _AddTestPageState extends State<AddTestPage> {
                     height: 64.h,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(12.r)),
-                      gradient: LinearGradient(
+                      gradient: const LinearGradient(
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                           colors: [Color(0xFF7D49F4), Color(0xFF5225C1)]),
@@ -344,7 +350,6 @@ class _AddTestPageState extends State<AddTestPage> {
               GestureDetector(
                 onTap: () {
                   if (allFieldsFilled()) {
-                    print("object");
                     List<TestInfo> infoTest = [];
 
                     for (int m = 0; m < question.length; m++) {
@@ -356,13 +361,13 @@ class _AddTestPageState extends State<AddTestPage> {
                       info.isAnwer = isCurrentAnswer[m];
                       infoTest.add(info);
                     }
-                    infoTest.forEach((action) {
-                      print("----------------");
-                      print("Action Answer: ${action.answer}");
-                      print("Action is Answer: ${action.isAnwer}");
-                      print("Action question: ${action.question}");
-                      print("----------------");
-                    });
+                    for (var action in infoTest) {
+                      log("----------------");
+                      log("Action Answer: ${action.answer}");
+                      log("Action is Answer: ${action.isAnwer}");
+                      log("Action question: ${action.question}");
+                      log("----------------");
+                    }
                     if (infoTest.isNotEmpty) {
                       Box<Test> contactsBox = Hive.box<Test>(HiveBoxes.test);
                       Test addTest = Test(
@@ -379,9 +384,9 @@ class _AddTestPageState extends State<AddTestPage> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(12.r)),
                     gradient: allFieldsFilled()
-                        ? LinearGradient(
+                        ? const LinearGradient(
                             colors: [Color(0xFF7D49F4), Color(0xFF5225C1)])
-                        : LinearGradient(colors: [
+                        : const LinearGradient(colors: [
                             Color.fromARGB(162, 124, 73, 244),
                             Color.fromARGB(103, 81, 37, 193)
                           ]),
@@ -392,7 +397,7 @@ class _AddTestPageState extends State<AddTestPage> {
                       style: TextStyle(
                           color: allFieldsFilled()
                               ? Colors.white
-                              : Color(0xFFF2F2F7).withOpacity(0.5),
+                              : const Color(0xFFF2F2F7).withOpacity(0.5),
                           fontSize: 24.sp),
                     ),
                   ),

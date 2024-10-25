@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -82,7 +83,7 @@ class PdfApi {
                             width: 220.w,
                             decoration: BoxDecoration(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(12)),
+                                    const BorderRadius.all(Radius.circular(12)),
                                 border: Border.all(width: 2.h)),
                             child: Center(
                               child: Text(
@@ -99,7 +100,7 @@ class PdfApi {
       ],
     ));
 
-    return saveDocument(name: "${nameFile}.pdf", pdf: pdf);
+    return saveDocument(name: "$nameFile.pdf", pdf: pdf);
   }
 
   static Future<File> saveDocument(
@@ -115,9 +116,9 @@ class PdfApi {
     final url = file.path;
     try {
       final result = await OpenFile.open(url);
-      print(result.message); // Это может помочь вам в отладке
+      log(result.message); // Это может помочь вам в отладке
     } catch (e) {
-      print(e);
+      log(e.toString());
     }
   }
 }

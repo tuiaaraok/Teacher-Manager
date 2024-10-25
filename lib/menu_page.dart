@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
@@ -5,10 +7,11 @@ import 'package:launch_review/launch_review.dart';
 import 'package:teacher/homework_page.dart';
 import 'package:teacher/journal_list_page.dart';
 import 'package:teacher/list_test_page.dart';
-import 'package:teacher/test_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MenuPage extends StatefulWidget {
+  const MenuPage({super.key});
+
   @override
   State<StatefulWidget> createState() => _MenuPageState();
 }
@@ -24,12 +27,10 @@ class _MenuPageState extends State<StatefulWidget> {
 
     return Opacity(
       opacity: opacity,
-      child: Container(
-        child: Icon(
-          IconsaxPlusLinear.book_saved,
-          color: Colors.black,
-          size: 30.w,
-        ),
+      child: Icon(
+        IconsaxPlusLinear.book_saved,
+        color: Colors.black,
+        size: 30.w,
       ),
     );
   });
@@ -42,7 +43,7 @@ class _MenuPageState extends State<StatefulWidget> {
           Padding(
             padding: EdgeInsets.symmetric(vertical: 30.h),
             child: GridView.count(
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               padding: EdgeInsets.zero,
               crossAxisCount: 9,
               children: calendarCells,
@@ -50,7 +51,7 @@ class _MenuPageState extends State<StatefulWidget> {
           ),
           Padding(
             padding: EdgeInsets.only(top: MediaQuery.paddingOf(context).top),
-            child: Container(
+            child: SizedBox(
               height: double.infinity,
               child: Column(
                 children: [
@@ -65,7 +66,7 @@ class _MenuPageState extends State<StatefulWidget> {
                         width: 119.w,
                         height: 38.h,
                         decoration: BoxDecoration(
-                            gradient: LinearGradient(
+                            gradient: const LinearGradient(
                                 colors: [Color(0xFF7D49F4), Color(0xFF5225C1)]),
                             borderRadius:
                                 BorderRadius.all(Radius.circular(12.r))),
@@ -79,7 +80,7 @@ class _MenuPageState extends State<StatefulWidget> {
                       ),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     height: 700.h,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -93,7 +94,7 @@ class _MenuPageState extends State<StatefulWidget> {
                                   context,
                                   MaterialPageRoute<void>(
                                     builder: (BuildContext context) =>
-                                        ListTestPage(),
+                                        const ListTestPage(),
                                   ),
                                 );
                               },
@@ -103,7 +104,7 @@ class _MenuPageState extends State<StatefulWidget> {
                                 decoration: BoxDecoration(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(12.r)),
-                                    gradient: LinearGradient(colors: [
+                                    gradient: const LinearGradient(colors: [
                                       Color(0xFF7D49F4),
                                       Color(0xFF5225C1)
                                     ])),
@@ -127,7 +128,7 @@ class _MenuPageState extends State<StatefulWidget> {
                                   context,
                                   MaterialPageRoute<void>(
                                     builder: (BuildContext context) =>
-                                        HomeworkPage(),
+                                        const HomeworkPage(),
                                   ),
                                 );
                               },
@@ -137,7 +138,7 @@ class _MenuPageState extends State<StatefulWidget> {
                                 decoration: BoxDecoration(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(12.r)),
-                                    gradient: LinearGradient(colors: [
+                                    gradient: const LinearGradient(colors: [
                                       Color(0xFF7D49F4),
                                       Color(0xFF5225C1)
                                     ])),
@@ -161,7 +162,7 @@ class _MenuPageState extends State<StatefulWidget> {
                                   context,
                                   MaterialPageRoute<void>(
                                     builder: (BuildContext context) =>
-                                        JournalListPage(),
+                                        const JournalListPage(),
                                   ),
                                 );
                               },
@@ -171,7 +172,7 @@ class _MenuPageState extends State<StatefulWidget> {
                                 decoration: BoxDecoration(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(12.r)),
-                                    gradient: LinearGradient(colors: [
+                                    gradient: const LinearGradient(colors: [
                                       Color(0xFF7D49F4),
                                       Color(0xFF5225C1)
                                     ])),
@@ -194,7 +195,7 @@ class _MenuPageState extends State<StatefulWidget> {
             ),
           ),
           if (onPressHelp)
-            Container(
+            SizedBox(
               height: double.infinity,
               width: double.infinity,
               child: Center(
@@ -203,7 +204,7 @@ class _MenuPageState extends State<StatefulWidget> {
                   width: 330.w,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(30.r)),
-                    gradient: LinearGradient(
+                    gradient: const LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [Color(0xFFA58ADD), Color(0xFFA272CF)]),
@@ -225,7 +226,7 @@ class _MenuPageState extends State<StatefulWidget> {
                               decoration: BoxDecoration(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(38.r)),
-                                gradient: LinearGradient(
+                                gradient: const LinearGradient(
                                     begin: Alignment.topCenter,
                                     end: Alignment.bottomCenter,
                                     colors: [
@@ -260,7 +261,7 @@ class _MenuPageState extends State<StatefulWidget> {
                               // ···
                               final Uri emailLaunchUri = Uri(
                                 scheme: 'mailto',
-                                path: 'TravisJohnson9902@outlook.com',
+                                path: 'grassogiuseppe988@gmail.com',
                                 query: encodeQueryParameters(<String, String>{
                                   '': '',
                                 }),
@@ -273,8 +274,7 @@ class _MenuPageState extends State<StatefulWidget> {
                                       "Could not launch $emailLaunchUri");
                                 }
                               } catch (e) {
-                                print(
-                                    'Error launching email client: $e'); // Log the error
+                                log('Error launching email client: $e'); // Log the error
                               }
                             },
                             child: Container(
@@ -283,7 +283,7 @@ class _MenuPageState extends State<StatefulWidget> {
                               decoration: BoxDecoration(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(12.r)),
-                                  gradient: LinearGradient(colors: [
+                                  gradient: const LinearGradient(colors: [
                                     Color(0xFF7D49F4),
                                     Color(0xFF5225C1)
                                   ])),
@@ -303,9 +303,10 @@ class _MenuPageState extends State<StatefulWidget> {
                         child: Center(
                           child: GestureDetector(
                             onTap: () async {
-                              final Uri _url = Uri.parse('https://flutter.dev');
-                              if (!await launchUrl(_url)) {
-                                throw Exception('Could not launch $_url');
+                              final Uri url = Uri.parse(
+                                  'https://telegra.ph/YakultEdu-Teacher-Manager-Privacy-Policy-10-25?showAgreebutton');
+                              if (!await launchUrl(url)) {
+                                throw Exception('Could not launch $url');
                               }
                             },
                             child: Container(
@@ -314,7 +315,7 @@ class _MenuPageState extends State<StatefulWidget> {
                               decoration: BoxDecoration(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(12.r)),
-                                  gradient: LinearGradient(colors: [
+                                  gradient: const LinearGradient(colors: [
                                     Color(0xFF7D49F4),
                                     Color(0xFF5225C1)
                                   ])),
@@ -334,9 +335,7 @@ class _MenuPageState extends State<StatefulWidget> {
                         child: Center(
                           child: GestureDetector(
                             onTap: () {
-                              LaunchReview.launch(
-                                  androidAppId: "app.openauthenticator",
-                                  iOSAppId: "585027354");
+                              LaunchReview.launch(iOSAppId: "6737413615");
                             },
                             child: Container(
                               width: 230.w,
@@ -344,7 +343,7 @@ class _MenuPageState extends State<StatefulWidget> {
                               decoration: BoxDecoration(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(12.r)),
-                                  gradient: LinearGradient(colors: [
+                                  gradient: const LinearGradient(colors: [
                                     Color(0xFF7D49F4),
                                     Color(0xFF5225C1)
                                   ])),

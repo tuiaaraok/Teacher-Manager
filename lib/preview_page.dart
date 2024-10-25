@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:teacher/menu_page.dart';
 
 class PreviewPage extends StatefulWidget {
-  PreviewPage({required this.name});
+  const PreviewPage({super.key, required this.name});
   final String name;
   @override
   State<PreviewPage> createState() => _PreviewPageState();
@@ -14,17 +14,17 @@ class PreviewPage extends StatefulWidget {
 
 class _PreviewPageState extends State<PreviewPage> {
   ConfettiController confettiController =
-      ConfettiController(duration: Duration(seconds: 3));
+      ConfettiController(duration: const Duration(seconds: 3));
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     confettiController.play();
-    Future.delayed(Duration(seconds: 8), () {
+    Future.delayed(const Duration(seconds: 8), () {
       Navigator.pushReplacement(
+        // ignore: use_build_context_synchronously
         context,
         MaterialPageRoute<void>(
-          builder: (BuildContext context) => MenuPage(),
+          builder: (BuildContext context) => const MenuPage(),
         ),
       );
     });
@@ -40,7 +40,7 @@ class _PreviewPageState extends State<PreviewPage> {
             blastDirection: -pi / 4,
             emissionFrequency: 0.2,
           ),
-          Container(
+          SizedBox(
             width: double.infinity,
             height: double.infinity,
             child: Column(

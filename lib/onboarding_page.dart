@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:teacher/create_name_page.dart';
 
 class OnboardingPage extends StatefulWidget {
+  const OnboardingPage({super.key});
+
   @override
   State<StatefulWidget> createState() => _OnboardingPageState();
 }
@@ -32,13 +34,13 @@ class _OnboardingPageState extends State<StatefulWidget> {
 
   Widget _indicator(bool isActive) {
     return AnimatedContainer(
-      duration: Duration(milliseconds: 150),
+      duration: const Duration(milliseconds: 150),
       margin: EdgeInsets.symmetric(horizontal: 4.w),
       height: isActive ? 10.0.h : 10.h,
       width: isActive ? 10.w : 10.h,
       decoration: BoxDecoration(
         color: isActive ? Colors.white : Colors.black.withOpacity(0.5),
-        borderRadius: BorderRadius.all(Radius.circular(12)),
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
       ),
     );
   }
@@ -48,7 +50,7 @@ class _OnboardingPageState extends State<StatefulWidget> {
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.only(top: MediaQuery.paddingOf(context).top),
-        child: Container(
+        child: SizedBox(
           width: double.infinity,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -66,7 +68,7 @@ class _OnboardingPageState extends State<StatefulWidget> {
                 padding: EdgeInsets.symmetric(vertical: 40.h, horizontal: 20.h),
                 child: Container(
                   decoration: BoxDecoration(
-                      gradient: LinearGradient(
+                      gradient: const LinearGradient(
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                           colors: [Color(0xFFB67FE1), Color(0xFF6E02C3)]),
@@ -94,7 +96,8 @@ class _OnboardingPageState extends State<StatefulWidget> {
                               subtitle[_currentPage],
                               style: TextStyle(
                                   fontSize: 15.sp,
-                                  color: Color(0xFFEBEBF5).withOpacity(0.6),
+                                  color:
+                                      const Color(0xFFEBEBF5).withOpacity(0.6),
                                   fontWeight: FontWeight.w700),
                             )),
                         _currentPage == 0
@@ -110,14 +113,14 @@ class _OnboardingPageState extends State<StatefulWidget> {
                                           context,
                                           MaterialPageRoute<void>(
                                             builder: (BuildContext context) =>
-                                                CreateNamePage(),
+                                                const CreateNamePage(),
                                           ),
                                         );
                                       },
                                       child: Text(
                                         "Skip",
                                         style: TextStyle(
-                                            color: Color(0xFFEBEBF5)
+                                            color: const Color(0xFFEBEBF5)
                                                 .withOpacity(0.6),
                                             fontWeight: FontWeight.w700,
                                             fontSize: 17.sp),
@@ -132,10 +135,11 @@ class _OnboardingPageState extends State<StatefulWidget> {
                                         width: 85.w,
                                         height: 50.h,
                                         decoration: BoxDecoration(
-                                            gradient: LinearGradient(colors: [
-                                              Color(0xFFF2E8FA),
-                                              Color(0xFFCEA9EB)
-                                            ]),
+                                            gradient: const LinearGradient(
+                                                colors: [
+                                                  Color(0xFFF2E8FA),
+                                                  Color(0xFFCEA9EB)
+                                                ]),
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(18.r))),
                                         child: Center(
@@ -159,7 +163,7 @@ class _OnboardingPageState extends State<StatefulWidget> {
                                       context,
                                       MaterialPageRoute<void>(
                                         builder: (BuildContext context) =>
-                                            CreateNamePage(),
+                                            const CreateNamePage(),
                                       ),
                                     );
                                   },
@@ -169,7 +173,7 @@ class _OnboardingPageState extends State<StatefulWidget> {
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(12.r)),
-                                        gradient: LinearGradient(colors: [
+                                        gradient: const LinearGradient(colors: [
                                           Color(0xFF7D49F4),
                                           Color(0xFF5225C1)
                                         ])),
