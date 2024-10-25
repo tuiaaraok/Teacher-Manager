@@ -60,7 +60,7 @@ class _ListTestPageState extends State<StatefulWidget> {
                           ],
                         ),
                       ),
-                      for (int i = 0; i < box.length; i++)
+                      for (int i = box.length - 1; i >= 0; i--)
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 20.h),
                           child: GestureDetector(

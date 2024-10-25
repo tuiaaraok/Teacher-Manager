@@ -304,7 +304,7 @@ class _MenuPageState extends State<StatefulWidget> {
                           child: GestureDetector(
                             onTap: () async {
                               final Uri url = Uri.parse(
-                                  'https://telegra.ph/YakultEdu-Teacher-Manager-Privacy-Policy-10-25?showAgreebutton');
+                                  'https://docs.google.com/document/d/1y0Y3tJQ0qlAKUpUboJRQT6te5D_5YBc0EuX6-H-EZ3M/mobilebasic');
                               if (!await launchUrl(url)) {
                                 throw Exception('Could not launch $url');
                               }
