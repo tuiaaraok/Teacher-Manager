@@ -38,7 +38,6 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key, required this.link});
   final String link;
-
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
