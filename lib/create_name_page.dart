@@ -40,7 +40,7 @@ class CreateNamePageState extends State<StatefulWidget> {
                       "What's your name?",
                       style: TextStyle(
                           fontSize: 24.sp,
-                          color: Colors.white.withOpacity(0.6),
+                          color: Colors.white.withValues(alpha: 0.6),
                           fontWeight: FontWeight.bold),
                     ),
                   ),
@@ -60,7 +60,7 @@ class CreateNamePageState extends State<StatefulWidget> {
                     decoration: BoxDecoration(
                         borderRadius:
                             const BorderRadius.all(Radius.circular(12)),
-                        color: const Color(0xFFC2B0FF).withOpacity(0.3),
+                        color: const Color(0xFFC2B0FF).withValues(alpha: 0.3),
                         border: Border.all(color: Colors.white, width: 2.h)),
                     child: Center(
                       child: TextField(
@@ -74,7 +74,7 @@ class CreateNamePageState extends State<StatefulWidget> {
                             hintText: 'Name',
                             hintStyle: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: Colors.white.withOpacity(0.5),
+                                color: Colors.white.withValues(alpha: 0.5),
                                 fontSize: 18.sp)),
                         keyboardType: TextInputType.text,
                         cursorColor: Colors.transparent,
@@ -130,7 +130,8 @@ class CreateNamePageState extends State<StatefulWidget> {
                             style: TextStyle(
                                 color: nameController.text.isNotEmpty
                                     ? Colors.white
-                                    : const Color(0xFFF2F2F7).withOpacity(0.5),
+                                    : const Color(0xFFF2F2F7)
+                                        .withValues(alpha: 0.5),
                                 fontSize: 24.sp),
                           ),
                         ),

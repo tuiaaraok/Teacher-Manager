@@ -39,7 +39,7 @@ class _OnboardingPageState extends State<StatefulWidget> {
       height: isActive ? 10.0.h : 10.h,
       width: isActive ? 10.w : 10.h,
       decoration: BoxDecoration(
-        color: isActive ? Colors.white : Colors.black.withOpacity(0.5),
+        color: isActive ? Colors.white : Colors.black.withValues(alpha: 0.5),
         borderRadius: const BorderRadius.all(Radius.circular(12)),
       ),
     );
@@ -96,8 +96,8 @@ class _OnboardingPageState extends State<StatefulWidget> {
                               subtitle[_currentPage],
                               style: TextStyle(
                                   fontSize: 15.sp,
-                                  color:
-                                      const Color(0xFFEBEBF5).withOpacity(0.6),
+                                  color: const Color(0xFFEBEBF5)
+                                      .withValues(alpha: 0.6),
                                   fontWeight: FontWeight.w700),
                             )),
                         _currentPage == 0
@@ -121,7 +121,7 @@ class _OnboardingPageState extends State<StatefulWidget> {
                                         "Skip",
                                         style: TextStyle(
                                             color: const Color(0xFFEBEBF5)
-                                                .withOpacity(0.6),
+                                                .withValues(alpha: 0.6),
                                             fontWeight: FontWeight.w700,
                                             fontSize: 17.sp),
                                       ),

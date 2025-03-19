@@ -51,7 +51,7 @@ class _PreviewPageState extends State<PreviewPage> {
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 28.sp,
-                      color: Colors.white.withOpacity(0.5)),
+                      color: Colors.white.withValues(alpha: 0.5)),
                 ),
                 SizedBox(
                   height: 40.h,

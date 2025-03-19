@@ -167,7 +167,7 @@ class _TestPageState extends State<TestPage> {
                                           borderRadius: const BorderRadius.all(
                                               Radius.circular(12)),
                                           color: const Color(0xFFC2B0FF)
-                                              .withOpacity(0.3),
+                                              .withValues(alpha: 0.3),
                                           border: Border.all(
                                               color: Colors.white, width: 2.h)),
                                       child: Center(

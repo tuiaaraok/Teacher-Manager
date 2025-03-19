@@ -149,7 +149,7 @@ class _AddJournalPageState extends State<AddJournalPage> {
                     decoration: BoxDecoration(
                         borderRadius:
                             const BorderRadius.all(Radius.circular(12)),
-                        color: const Color(0xFFC2B0FF).withOpacity(0.3),
+                        color: const Color(0xFFC2B0FF).withValues(alpha: 0.3),
                         border: Border.all(color: Colors.white, width: 2.h)),
                     child: Center(
                       child: TextField(
@@ -163,7 +163,7 @@ class _AddJournalPageState extends State<AddJournalPage> {
                             hintText: 'Name',
                             hintStyle: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: Colors.white.withOpacity(0.5),
+                                color: Colors.white.withValues(alpha: 0.5),
                                 fontSize: 18.sp)),
                         keyboardType: TextInputType.text,
                         cursorColor: Colors.transparent,
@@ -224,7 +224,7 @@ class _AddJournalPageState extends State<AddJournalPage> {
                                     color: notesController.text.isNotEmpty
                                         ? const Color(0xFF6E02C3)
                                         : const Color(0xFF6E02C3)
-                                            .withOpacity(0.5)),
+                                            .withValues(alpha: 0.5)),
                               ),
                             ),
                           ),
@@ -395,7 +395,7 @@ class EmployeeDataSource extends DataGridSource {
           decoration: BoxDecoration(border: Border.all(color: Colors.white)),
           alignment: Alignment.center,
           child: CircleAvatar(
-            backgroundColor: const Color(0xFFC2B0FF).withOpacity(0.3),
+            backgroundColor: const Color(0xFFC2B0FF).withValues(alpha: 0.3),
             child: IconButton(
               icon: const Icon(
                 Icons.add,

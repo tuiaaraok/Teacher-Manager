@@ -97,7 +97,7 @@ class _AddTestPageState extends State<AddTestPage> {
                       decoration: BoxDecoration(
                           borderRadius:
                               const BorderRadius.all(Radius.circular(12)),
-                          color: const Color(0xFFC2B0FF).withOpacity(0.3),
+                          color: const Color(0xFFC2B0FF).withValues(alpha: 0.3),
                           border: Border.all(color: Colors.white, width: 2.h)),
                       child: Center(
                         child: TextField(
@@ -110,7 +110,7 @@ class _AddTestPageState extends State<AddTestPage> {
                               hintText: 'Name',
                               hintStyle: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white.withOpacity(0.5),
+                                  color: Colors.white.withValues(alpha: 0.5),
                                   fontSize: 18.sp)),
                           keyboardType: TextInputType.text,
                           cursorColor: Colors.transparent,
@@ -152,7 +152,8 @@ class _AddTestPageState extends State<AddTestPage> {
                           decoration: BoxDecoration(
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(12)),
-                              color: const Color(0xFFC2B0FF).withOpacity(0.3),
+                              color: const Color(0xFFC2B0FF)
+                                  .withValues(alpha: 0.3),
                               border:
                                   Border.all(color: Colors.white, width: 2.h)),
                           child: Center(
@@ -166,7 +167,8 @@ class _AddTestPageState extends State<AddTestPage> {
                                   hintText: 'Name',
                                   hintStyle: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.white.withOpacity(0.5),
+                                      color:
+                                          Colors.white.withValues(alpha: 0.5),
                                       fontSize: 18.sp)),
                               keyboardType: TextInputType.text,
                               cursorColor: Colors.transparent,
@@ -225,7 +227,7 @@ class _AddTestPageState extends State<AddTestPage> {
                                       borderRadius: const BorderRadius.all(
                                           Radius.circular(12)),
                                       color: const Color(0xFFC2B0FF)
-                                          .withOpacity(0.3),
+                                          .withValues(alpha: 0.3),
                                       border: Border.all(
                                           color: Colors.white, width: 2.h)),
                                   child: Center(
@@ -239,8 +241,8 @@ class _AddTestPageState extends State<AddTestPage> {
                                           hintText: 'Answer choice $k',
                                           hintStyle: TextStyle(
                                               fontWeight: FontWeight.bold,
-                                              color:
-                                                  Colors.white.withOpacity(0.5),
+                                              color: Colors.white
+                                                  .withValues(alpha: 0.5),
                                               fontSize: 18.sp)),
                                       keyboardType: TextInputType.text,
                                       cursorColor: Colors.transparent,
@@ -397,7 +399,7 @@ class _AddTestPageState extends State<AddTestPage> {
                       style: TextStyle(
                           color: allFieldsFilled()
                               ? Colors.white
-                              : const Color(0xFFF2F2F7).withOpacity(0.5),
+                              : const Color(0xFFF2F2F7).withValues(alpha: 0.5),
                           fontSize: 24.sp),
                     ),
                   ),

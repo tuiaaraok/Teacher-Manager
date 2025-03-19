@@ -205,7 +205,7 @@ class _HomeworkPageState extends State<StatefulWidget> {
                                                 "Add your first homework",
                                                 style: TextStyle(
                                                     color: Colors.white
-                                                        .withOpacity(0.5),
+                                                        .withValues(alpha: 0.5),
                                                     fontSize: 18.sp,
                                                     fontWeight:
                                                         FontWeight.w700),

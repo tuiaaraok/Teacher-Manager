@@ -35,56 +35,6 @@ void main() async {
   });
 }
 
-Future<String> _initializeRemoteConfig() async {
-  final remoteConfig = FirebaseRemoteConfig.instance;
-  var box = await Hive.openBox('privacyLink');
-  String link = '';
-
-  if (box.isEmpty) {
-    await remoteConfig.setConfigSettings(RemoteConfigSettings(
-      fetchTimeout: const Duration(minutes: 1),
-      minimumFetchInterval: const Duration(minutes: 1),
-    ));
-
-    try {
-      bool updated = await remoteConfig.fetchAndActivate();
-      log("Remote Config Update Status: $updated");
-
-      link = remoteConfig.getString("link");
-
-      log("Fetched link: $link");
-    } catch (e) {
-      log("Failed to fetch remote config: $e");
-    }
-  } else {
-    if (box.get('link').contains("showAgreebutton")) {
-      await remoteConfig.setConfigSettings(RemoteConfigSettings(
-        fetchTimeout: const Duration(minutes: 1),
-        minimumFetchInterval: const Duration(minutes: 1),
-      ));
-
-      try {
-        bool updated = await remoteConfig.fetchAndActivate();
-        log("Remote Config Update Status: $updated");
-
-        link = remoteConfig.getString("link");
-        log("Fetched link: $link");
-      } catch (e) {
-        log("Failed to fetch remote config: $e");
-      }
-      if (!link.contains("showAgreebutton")) {
-        box.put('link', link);
-      }
-    } else {
-      link = box.get('link');
-    }
-  }
-
-  return link == ""
-      ? "https://telegra.ph/YakultEdu-Teacher-Manager-Privacy-Policy-10-25?showAgreebutton"
-      : link;
-}
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key, required this.link});
   final String link;
@@ -121,6 +71,50 @@ class MyApp extends StatelessWidget {
   }
 }
 
+Future<String> _initializeRemoteConfig() async {
+  final remoteConfig = FirebaseRemoteConfig.instance;
+
+  String link = '';
+
+  if (Hive.box("privacyLink").isEmpty) {
+    await remoteConfig.setConfigSettings(RemoteConfigSettings(
+      fetchTimeout: const Duration(minutes: 1),
+      minimumFetchInterval: const Duration(minutes: 1),
+    ));
+
+    try {
+      await remoteConfig.fetchAndActivate();
+      link = remoteConfig.getString("link");
+    } catch (e) {
+      log("Failed to fetch remote config: $e");
+    }
+  } else {
+    if (Hive.box("privacyLink").get('link').contains("showAgreebutton")) {
+      await remoteConfig.setConfigSettings(RemoteConfigSettings(
+        fetchTimeout: const Duration(minutes: 1),
+        minimumFetchInterval: const Duration(minutes: 1),
+      ));
+
+      try {
+        await remoteConfig.fetchAndActivate().whenComplete(() {
+          link = remoteConfig.getString("link");
+          if (!link.contains("showAgreebutton") && link.isNotEmpty) {
+            Hive.box("privacyLink").put('link', link);
+          }
+        });
+      } catch (e) {
+        log("Failed to fetch remote config: $e");
+      }
+    } else {
+      link = Hive.box("privacyLink").get('link');
+    }
+  }
+
+  return link == ""
+      ? "https://telegra.ph/YakultEdu-Teacher-Manager-Privacy-Policy-10-25?showAgreebutton"
+      : link;
+}
+
 class WebViewScreen extends StatefulWidget {
   const WebViewScreen({super.key, required this.link});
   final String link;
@@ -134,13 +128,11 @@ class WebViewScreen extends StatefulWidget {
 class _WebViewScreenState extends State<WebViewScreen> {
   bool loadAgree = false;
   WebViewController controller = WebViewController();
+  final remoteConfig = FirebaseRemoteConfig.instance;
 
   @override
   void initState() {
     super.initState();
-    if (Hive.box("privacyLink").isEmpty) {
-      Hive.box("privacyLink").put('link', widget.link);
-    }
 
     _initializeWebView(widget.link); // Initialize WebViewController
   }
@@ -175,37 +167,42 @@ class _WebViewScreenState extends State<WebViewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: Padding(
         padding: EdgeInsets.only(top: MediaQuery.paddingOf(context).top),
         child: Stack(children: [
           WebViewWidget(controller: controller),
-          if (loadAgree)
-            GestureDetector(
+          if (loadAgree) ...[
+            if (widget.link.contains("showAgreebutton")) ...[
+              GestureDetector(
                 onTap: () async {
-                  var box = await Hive.openBox('privacyLink');
-                  box.put('link', widget.link);
-                  Navigator.push(
-                    // ignore: use_build_context_synchronously
-                    context,
-                    MaterialPageRoute<void>(
-                      builder: (BuildContext context) => const OnboardingPage(),
-                    ),
-                  );
+                  await Hive.openBox('privacyLink').then((box) {
+                    box.put('link', widget.link);
+                    Navigator.push(
+                      // ignore: use_build_context_synchronously
+                      context,
+                      MaterialPageRoute<void>(
+                        builder: (BuildContext context) =>
+                            const OnboardingPage(),
+                      ),
+                    );
+                  });
                 },
-                child: widget.link.contains("showAgreebutton")
-                    ? Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Padding(
-                          padding: const EdgeInsets.only(bottom: 20),
-                          child: Container(
-                            width: 200,
-                            height: 60,
-                            color: Colors.amber,
-                            child: const Center(child: Text("AGREE")),
-                          ),
-                        ))
-                    : null),
+                child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: Container(
+                        width: 200,
+                        height: 60,
+                        color: Colors.amber,
+                        child: const Center(child: Text("AGREE")),
+                      ),
+                    )),
+              )
+            ]
+          ]
         ]),
       ),
     );

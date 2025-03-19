@@ -160,7 +160,7 @@ class _JournalPageState extends State<JournalPage> {
                     decoration: BoxDecoration(
                         borderRadius:
                             const BorderRadius.all(Radius.circular(12)),
-                        color: const Color(0xFFC2B0FF).withOpacity(0.3),
+                        color: const Color(0xFFC2B0FF).withValues(alpha: 0.3),
                         border: Border.all(color: Colors.white, width: 2.h)),
                     child: Center(
                         child: Text(
@@ -388,7 +388,7 @@ class EmployeeDataSource extends DataGridSource {
           decoration: BoxDecoration(border: Border.all(color: Colors.white)),
           alignment: Alignment.center,
           child: CircleAvatar(
-            backgroundColor: const Color(0xFFC2B0FF).withOpacity(0.3),
+            backgroundColor: const Color(0xFFC2B0FF).withValues(alpha: 0.3),
             child: IconButton(
               icon: const Icon(
                 Icons.add,

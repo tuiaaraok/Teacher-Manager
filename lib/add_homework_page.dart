@@ -100,7 +100,8 @@ class _AddHomeworkPageState extends State<StatefulWidget> {
                                     Border.all(color: Colors.white, width: 2.h),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(12.r)),
-                                color: const Color(0xFFC2B0FF).withOpacity(0.3),
+                                color: const Color(0xFFC2B0FF)
+                                    .withValues(alpha: 0.3),
                               ),
                               child: Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 10.w),
@@ -113,7 +114,8 @@ class _AddHomeworkPageState extends State<StatefulWidget> {
                                     hintText: 'Name',
                                     hintStyle: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.white.withOpacity(0.5),
+                                      color:
+                                          Colors.white.withValues(alpha: 0.5),
                                       fontSize: 18.sp,
                                     ),
                                   ),
@@ -157,7 +159,7 @@ class _AddHomeworkPageState extends State<StatefulWidget> {
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(12.r)),
                                       color: const Color(0xFFC2B0FF)
-                                          .withOpacity(0.3),
+                                          .withValues(alpha: 0.3),
                                     ),
                                     child: Padding(
                                       padding: EdgeInsets.symmetric(
@@ -172,8 +174,8 @@ class _AddHomeworkPageState extends State<StatefulWidget> {
                                           hintText: '01.12.2024',
                                           hintStyle: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            color:
-                                                Colors.white.withOpacity(0.5),
+                                            color: Colors.white
+                                                .withValues(alpha: 0.5),
                                             fontSize: 16.sp,
                                           ),
                                         ),
@@ -212,7 +214,7 @@ class _AddHomeworkPageState extends State<StatefulWidget> {
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(12.r)),
                                       color: const Color(0xFFC2B0FF)
-                                          .withOpacity(0.3),
+                                          .withValues(alpha: 0.3),
                                     ),
                                     child: Padding(
                                       padding: EdgeInsets.symmetric(
@@ -227,8 +229,8 @@ class _AddHomeworkPageState extends State<StatefulWidget> {
                                           hintText: '01.12.2024',
                                           hintStyle: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            color:
-                                                Colors.white.withOpacity(0.5),
+                                            color: Colors.white
+                                                .withValues(alpha: 0.5),
                                             fontSize: 16.sp,
                                           ),
                                         ),
@@ -269,7 +271,8 @@ class _AddHomeworkPageState extends State<StatefulWidget> {
                                     Border.all(color: Colors.white, width: 2.h),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(12.r)),
-                                color: const Color(0xFFC2B0FF).withOpacity(0.3),
+                                color: const Color(0xFFC2B0FF)
+                                    .withValues(alpha: 0.3),
                               ),
                               child: Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 10.w),
@@ -285,7 +288,8 @@ class _AddHomeworkPageState extends State<StatefulWidget> {
                                     hintText: 'Task name',
                                     hintStyle: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.white.withOpacity(0.5),
+                                      color:
+                                          Colors.white.withValues(alpha: 0.5),
                                       fontSize: 18.sp,
                                     ),
                                   ),
@@ -345,7 +349,7 @@ class _AddHomeworkPageState extends State<StatefulWidget> {
                                       color: allFieldsFilled()
                                           ? Colors.white
                                           : const Color(0xFFF2F2F7)
-                                              .withOpacity(0.5),
+                                              .withValues(alpha: 0.5),
                                       fontSize: 24.sp),
                                 ),
                               ),
